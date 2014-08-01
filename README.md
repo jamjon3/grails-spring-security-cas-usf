@@ -16,6 +16,16 @@ Additional features beyond the standard CAS plugin include
 
 Once you have configured a CAS server and have configured your Grails application(s) as clients, you can authenticate to any application that is a client of the CAS server and be automatically authenticated to all other clients.
 
+##Table of Contents
+
+1. Introduction
+  1.1 Change Log
+2. Usage
+3. Configuration
+4. Helper Classes
+  4.1 UsfCasService
+  4.2 CASTagLib
+
 ##Usage
 
 > **Note:** This guide assumes that you are using authtest.it.usf.edu for development and testing and webauth.usf.edu for production
