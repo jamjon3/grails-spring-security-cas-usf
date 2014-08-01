@@ -5,13 +5,13 @@ Grails CAS plugin customized for the University of South Florida
 
 ##Table of Contents
 
-1. Introduction
-  1. Change Log
-2. Usage
-3. Configuration
-4. Helper Classes
-  1. UsfCasService
-  2. CASTagLib
+1. [Introduction](#introduction)
+  1. [Change Log](#change-log)
+2. [Usage](#usage)
+3. [Configuration](#configuration)
+4. [Helper Classes](#helper-classes)
+  1. [UsfCasService](#usfcasservice)
+  2. [CASTagLib](#castaglib)
 
 ##Introduction
 
