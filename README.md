@@ -77,3 +77,9 @@ Once you have tested your app on localhost and are ready to run `grails war`, op
   * List of attributes that need to be released
 
 ##<a name="configuration"></a>Configuration
+
+There are a few configuration options for the CAS plugin.
+
+> All of these property overrides must be specified in `grails-app/conf/Config.groovy` using the `grails.plugins.springsecurity` prefix, for example
+> ```grails.plugins.springsecurity.cas.serverUrlPrefix =
+     'https://authtest.it.usf.edu'``` 
