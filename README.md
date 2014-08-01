@@ -213,7 +213,7 @@ class SomeController {
 
 **getAuthentication()**
 
-Retrieves the current user's [Authentication](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/core/Authentication.html). If authenticated in, this will typically be a [UsernamePasswordAuthenticationToken\(http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/authentication/UsernamePasswordAuthenticationToken.html).
+Retrieves the current user's [Authentication](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/core/Authentication.html). If authenticated in, this will typically be a [UsernamePasswordAuthenticationToken](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/authentication/UsernamePasswordAuthenticationToken.html).
 
 If not authenticated and the [AnonymousAuthenticationFilter](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AnonymousAuthenticationFilter.html) is active (true by default) then the anonymous user's authentication will be returned ([AnonymousAuthenticationToken](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/authentication/AnonymousAuthenticationToken.html) with username 'anonymousUser' unless overridden).
 
