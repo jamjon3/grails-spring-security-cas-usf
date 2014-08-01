@@ -18,7 +18,7 @@ Once you have configured a CAS server and have configured your Grails applicatio
 
 ##Table of Contents
 
-[TOC]
+{:toc}
 
 ##Usage
 
