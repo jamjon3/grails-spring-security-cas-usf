@@ -106,3 +106,129 @@ grails.plugins.springsecurity.cas.serverUrlPrefix =
 |<sub>cas.useSamlValidator</sub>	| <sub>`true`</sub>	| <sub>Use SAML 1.1 for attribute release</sub> |
 |<sub>cas.driftTolerance</sub>	| <sub>`12000`</sub>	| <sub>SAML tokens are very time sensitive. Handle 'time drift' between client and server. (ms)</sub> |
 |<sub>cas.authorityAttribute</sub>	| <sub>`eduPersonEntitlement`</sub> 	| <sub>Read attribute for SpringSecurity Roles</sub> |
+
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'edu.usf.cims.UsfCasUser'
+
+## Helper Classes
+
+Use the plugin helper classes in your application to avoid dealing with some lower-level details of Spring Security.
+
+###UsfCasService
+
+**getUsername()**
+
+Retrieves the username passed during authentication (NetID)
+
+Example:
+
+```
+class SomeController {
+   def usfCasService
+   def someAction = {
+      def user = usfCasService.username
+      …
+   }
+}
+```
+
+**getEppa()**
+
+Retrieves the EduPersonPrimaryAffiliation for the currently logged in user
+
+Example:
+
+```
+class SomeController {
+   def usfCasService
+   def someAction = {
+      def primaryAffil = usfCasService.eppa
+      …
+   }
+}
+```
+
+**getAttributes()**
+
+Retrieves a map of the attributes passed by CAS for the currently logged in user
+
+Example:
+
+```
+class SomeController {
+   def usfCasService
+   def someAction = {
+      def attrMap = usfCasService.attributes
+
+      def commonName = attributes.CommonName
+      …
+   }
+}
+```
+
+> `edu.usf.cims.UsfCasService` inherits from `grails.plugins.springsecurity.SpringSecurityService`, so the rest of this document was copied from spring-security-core's docs
+
+`edu.usf.cims.UsfCasService` provides security utility functions. It is a regular Grails service, so you use dependency injection to inject it into a controller, service, taglib, and so on:
+
+```
+def usfCasService
+```
+
+**getCurrentUser()**
+
+Retrieves a domain class instance for the currently authenticated user. During authentication a user/person domain class instance is loaded to get the user's password, roles, etc. and the id of the instance is saved. This method uses the id and the domain class to re-load the instance.
+
+Example:
+
+```
+class SomeController {
+   def usfCasService
+
+   def someAction = {
+      def user = usfCasService.currentUser
+      …
+   }
+}
+```
+
+**isLoggedIn()**
+
+Checks whether there is a currently logged-in user.
+
+Example:
+
+```
+class SomeController {
+   def usfCasService
+
+   def someAction = {
+      if (usfCasService.isLoggedIn()) {
+         …
+      }
+      else {
+         …
+      }
+   }
+}
+```
+
+**getAuthentication()**
+
+Retrieves the current user's [Authentication](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/core/Authentication.html). If authenticated in, this will typically be a [UsernamePasswordAuthenticationToken\(http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/authentication/UsernamePasswordAuthenticationToken.html).
+
+If not authenticated and the [AnonymousAuthenticationFilter](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AnonymousAuthenticationFilter.html) is active (true by default) then the anonymous user's authentication will be returned ([AnonymousAuthenticationToken](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/authentication/AnonymousAuthenticationToken.html) with username 'anonymousUser' unless overridden).
+
+Example:
+
+```
+class SomeController {
+   def usfCasService
+
+   def someAction = {
+      def auth = usfCasService.authentication
+      String username = auth.username
+      def authorities = auth.authorities // a Collection of GrantedAuthority
+      boolean authenticated = auth.authenticated
+      …
+   }
+}
+```
