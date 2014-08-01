@@ -3,6 +3,8 @@ grails-spring-security-cas-usf
 
 Grails CAS plugin customized for the University of South Florida
 
+##Introduction
+
 The Spring-Security-USF plugin builds on the [spring-security-cas](http://grails.org/plugin/spring-security-cas) plugin. It depends on the [Spring Security Core plugin](http://grails.org/plugin/spring-security-core).
 
 Additional features beyond the standard CAS plugin include
