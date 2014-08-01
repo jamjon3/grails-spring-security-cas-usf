@@ -19,12 +19,12 @@ Once you have configured a CAS server and have configured your Grails applicatio
 ##Table of Contents
 
 1. Introduction
-  1.1 Change Log
+  1. Change Log
 2. Usage
 3. Configuration
 4. Helper Classes
-  4.1 UsfCasService
-  4.2 CASTagLib
+  1. UsfCasService
+  2. CASTagLib
 
 ##Usage
 
