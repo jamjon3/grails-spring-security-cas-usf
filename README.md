@@ -16,10 +16,6 @@ Additional features beyond the standard CAS plugin include
 
 Once you have configured a CAS server and have configured your Grails application(s) as clients, you can authenticate to any application that is a client of the CAS server and be automatically authenticated to all other clients.
 
-##Table of Contents
-
-{:toc}
-
 ##Usage
 
 > **Note:** This guide assumes that you are using authtest.it.usf.edu for development and testing and webauth.usf.edu for production
@@ -31,5 +27,20 @@ There isn't much that you need to do in your application to be a CAS client. Jus
 ###Installation
 
 Download the latest version of the plugin zip file from [GitHub](https://github.com/epierce/grails-spring-security-cas-usf/raw/master/spring-security-cas-usf-1.3.0.zip), drop it into the lib directory of your Grails project and update `grails-app/conf/BuildConfig.groovy`:
+
+```
+  plugins {
+        compile ">>
+        compile ">>
+  }
+```
+
+###grails usf-cas-config
+
+After you have installed the plugin, run this command to add the necessary configuration options:
+
+```
+grails usf-cas-config
+```
 
 ##<a name="configuration"></a>Configuration
