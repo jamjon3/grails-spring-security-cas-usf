@@ -57,8 +57,8 @@ Download the latest version of the plugin zip file from [GitHub](https://github.
 
 ```
   plugins {
-        compile ">>
-        compile ">>
+        compile ":spring-security-core:1.2.7.3"
+        compile ":spring-security-cas-usf:1.3.0"
   }
 ```
 
@@ -192,7 +192,7 @@ class SomeController {
 }
 ```
 
-> `edu.usf.cims.UsfCasService` inherits from `grails.plugins.springsecurity.SpringSecurityService`, so the rest of this document was copied from spring-security-core's docs
+> **Note:** `edu.usf.cims.UsfCasService` inherits from `grails.plugins.springsecurity.SpringSecurityService`, so the rest of this document was copied from spring-security-core's docs
 
 `edu.usf.cims.UsfCasService` provides security utility functions. It is a regular Grails service, so you use dependency injection to inject it into a controller, service, taglib, and so on:
 
