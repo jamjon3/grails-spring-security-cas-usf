@@ -87,7 +87,7 @@ grails.plugins.springsecurity.cas.serverUrlPrefix =
      'https://authtest.it.usf.edu'
 ``` 
 > 
-
+<sub>
 | Name	                        | Default	                 | Meaning                                                                                                                                                                                               |
 | ----------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |userLookup.userDomainClassName | `edu.usf.cims.UsfCasUser`	 | SpringSecurity User Class                                                                                                                                                                             |
@@ -97,12 +97,13 @@ grails.plugins.springsecurity.cas.serverUrlPrefix =
 |cas.sendRenew	                | `false`	                 | if true, ticket validation will only succeed if it was issued from a login form, but will fail if it was issued from a single sign-on session. Analagous to `IS_AUTHENTICATED_FULLY` in Spring Security |
 |cas.serviceUrl	                | `http://localhost:8080/${appName}/j_spring_cas_security_check` |	the local application login URL |
 |cas.key	| random value	| used by `CasAuthenticationProvider` to identify tokens it previously authenticated. Generated automatically by `grails usf-cas-config` |
-|cas.artifactParameter	ticket	the ticket login url parameter
-|cas.serviceParameter	service	the service login url parameter
-|cas.filterProcessesUrl	/j_spring_cas_security_check	the URL that the filter intercepts for login
-|cas.proxyCallbackUrl	http://localhost:8080/${appName}/secure/receptor	proxy callback url
-|cas.proxyReceptorUrl	/secure/receptor	proxy receptor url
-|cas.useSingleSignout	false	if true a org.jasig.cas.client.session.SingleSignOutFilter is registered in web.xml
-|cas.useSamlValidator	true	Use SAML 1.1 for attribute release
-|cas.driftTolerance	12000	SAML tokens are very time sensitive. Handle 'time drift' between client and server. (ms)
-|cas.authorityAttribute	eduPersonEntitlement	Read attribute for SpringSecurity Roles
+|cas.artifactParameter	| `ticket`	| the ticket login url parameter |
+|cas.serviceParameter	| `service`	| the service login url parameter |
+|cas.filterProcessesUrl	| `/j_spring_cas_security_check`	| the URL that the filter intercepts for login |
+|cas.proxyCallbackUrl	| `http://localhost:8080/${appName}/secure/receptor`	| proxy callback url |
+|cas.proxyReceptorUrl	| `/secure/receptor`	| proxy receptor url |
+|cas.useSingleSignout	| `false`	| if `true` a `org.jasig.cas.client.session.SingleSignOutFilter` is registered in web.xml |
+|cas.useSamlValidator	| `true`	| Use SAML 1.1 for attribute release |
+|cas.driftTolerance	| `12000`	| SAML tokens are very time sensitive. Handle 'time drift' between client and server. (ms) |
+|cas.authorityAttribute	| `eduPersonEntitlement` 	| Read attribute for SpringSecurity Roles |
+</sub>
