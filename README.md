@@ -7,9 +7,9 @@ The Spring-Security-USF plugin builds on the [spring-security-cas](http://grails
 
 Additional features beyond the standard CAS plugin include
 
-..* Attribute release through [SAML1.1](https://wiki.jasig.org/display/CASUM/SAML+1.1)
-..* USF-specific configuration script
-..* Spring Security service - UsfCasService
-..* <cas:> tag library
+  * Attribute release through [SAML1.1](https://wiki.jasig.org/display/CASUM/SAML+1.1)
+  * USF-specific configuration script
+  * Spring Security service - UsfCasService
+  * <cas:> tag library
 
 Once you have configured a CAS server and have configured your Grails application(s) as clients, you can authenticate to any application that is a client of the CAS server and be automatically authenticated to all other clients.
