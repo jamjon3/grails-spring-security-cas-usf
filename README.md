@@ -87,7 +87,7 @@ grails.plugins.springsecurity.cas.serverUrlPrefix =
      'https://authtest.it.usf.edu'
 ``` 
 > 
-<sub>
+
 | Name	                        | Default	                 | Meaning                                                                                                                                                                                               |
 | ----------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |userLookup.userDomainClassName | `edu.usf.cims.UsfCasUser`	 | SpringSecurity User Class                                                                                                                                                                             |
@@ -106,4 +106,3 @@ grails.plugins.springsecurity.cas.serverUrlPrefix =
 |cas.useSamlValidator	| `true`	| Use SAML 1.1 for attribute release |
 |cas.driftTolerance	| `12000`	| SAML tokens are very time sensitive. Handle 'time drift' between client and server. (ms) |
 |cas.authorityAttribute	| `eduPersonEntitlement` 	| Read attribute for SpringSecurity Roles |
-</sub>
