@@ -254,3 +254,192 @@ class SomeController {
    }
 }
 ```
+
+####updateRole()
+
+Updates a role and, if you use `Requestmap` instances to secure URLs, updates the role name in all affected `Requestmap` definitions if the name was changed.
+
+Example:
+
+```
+class RoleController {
+   def usfCasService
+
+   def update = {
+      def roleInstance = Role.get(params.id)
+      if (!usfCasService.updateRole(roleInstance, params)) {
+         render view: 'edit', model: [roleInstance: roleInstance]
+         return
+      }
+
+      flash.message = "The role was updated"
+      redirect action: show, id: roleInstance.id
+   }
+}
+```
+
+####deleteRole()
+
+Deletes a role and, if you use `Requestmap` instances to secure URLs, removes the role from all affected `Requestmap` definitions. If a `Requestmap`'s config attribute is only the role name (for example, "/foo/bar/**=ROLE_FOO"), it is deleted.
+
+Example:
+
+```
+class RoleController {
+   def usfCasService
+
+   def delete = {
+      def roleInstance = Role.get(params.id)
+      try {
+         usfCasService.deleteRole (roleInstance
+         flash.message = "The role was deleted"
+         redirect action: list
+      }
+      catch (DataIntegrityViolationException e) {
+         flash.message = "Unable to delete the role"
+         redirect action: show, id: params.id
+      }
+   }
+}
+```
+
+####clearCachedRequestmaps()
+
+Flushes the `Requestmaps` cache and triggers a complete reload. If you use `Requestmap` instances to secure URLs, the plugin loads and caches all `Requestmap` instances as a performance optimization. This action saves database activity because the requestmaps are checked for each request. Do not allow the cache to become stale. When you create, edit or delete a `Requestmap`, flush the cache. Both `updateRole()` and `deleteRole()` call `clearCachedRequestmaps()` for you. Call this method when you create a new `Requestmap` or do other `Requestmap` work that affects the cache.
+
+Example:
+
+```
+class RequestmapController {
+   def usfCasService
+
+   def save = {
+      def requestmapInstance = new Requestmap(params)
+      if (!requestmapInstance.save(flush: true)) {
+         render view: 'create', model: [requestmapInstance: requestmapInstance]
+         return
+      }
+
+      usfCasService.clearCachedRequestmaps()
+      flash.message = "Requestmap created"
+      redirect action: show, id: requestmapInstance.id
+   }
+}
+```
+
+####reauthenticate()
+
+Rebuilds an [Authentication](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/core/Authentication.html) for the given username and registers it in the security context. You typically use this method after updating a user's authorities or other data that is cached in the `Authentication` or `Principal`. It also removes the user from the user cache to force a refresh at next login.
+
+Example:
+
+```
+class UserController {
+   def usfCasService
+
+   def update = {
+      def userInstance = User.get(params.id)
+
+      params.salt = person.salt
+      if (params.password) {
+         params.password = usfCasService.encodePassword(params.password, salt)
+         def salt = … // e.g. randomly generated using some utility method
+         params.salt = salt
+      }
+      userInstance.properties = params
+      if (!userInstance.save(flush: true)) {
+         render view: 'edit', model: [userInstance: userInstance]
+         return
+      }
+
+      if (usfCasService.loggedIn &&
+             usfCasService.principal.username == userInstance.username) {
+         usfCasService.reauthenticate userInstance.username
+      }
+
+      flash.message = "The user was updated"
+      redirect action: show, id: userInstance.id
+   }
+}
+```
+
+###CASTagLib
+
+The plugin includes GSP tags to support conditional display based on whether the user is authenticated, and/or has the required EduPersonAffiliation or SpringSecurityRole to perform a particular action. These tags are in the `cas` namespace and are implemented in `edu.usf.cims.CASTagLib`.
+
+####ifLoggedIn
+
+Displays the inner body content if the user is authenticated.
+
+Example:
+
+```
+<cas:ifLoggedIn>
+Welcome Back!
+</cas:ifLoggedIn>
+```
+
+####ifNotLoggedIn
+
+Displays the inner body content if the user is not authenticated.
+
+Example:
+
+```
+<cas:ifNotLoggedIn>
+<g:link controller='login' action='auth'>Login</g:link>
+</cas:ifNotLoggedIn>
+```
+
+####ifEPPA
+
+Displays the inner body content only if the user's EPPA matches the listed value
+
+Example:
+
+```
+<cas:ifEPPA eppa="faculty">
+This text is only visible by faculty
+</cas:ifEPPA>
+```
+
+####ifNotEPPA
+
+Displays the inner body content only if the user's EPPA does not match the listed value
+
+Example:
+
+```
+<cas:ifNotEPPA eppa="student">
+Students can't read this
+</cas:ifNotEPPA>
+```
+
+####attribute
+
+Displays the value of the specified attribute if logged in. For example, to show the `mail` property:
+
+```
+<cas:attribute name="mail"/>
+```
+
+####username
+
+Displays the value of the authentication `username` field if logged in.
+
+```
+<cas:ifLoggedIn>
+Welcome Back <cas:username/>!
+</cas:ifLoggedIn>
+<cas:ifNotLoggedIn>
+<g:link controller='login' action='auth'>Login</g:link>
+</cas:ifNotLoggedIn>
+```
+
+####eppa
+
+Displays the value of the EduPersonPrimaryAffiliation if logged in.
+
+```
+Your Primary Affiliation is <cas:eppa/>
+```
