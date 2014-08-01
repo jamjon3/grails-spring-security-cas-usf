@@ -94,9 +94,9 @@ grails.plugins.springsecurity.cas.serverUrlPrefix =
 |cas.active	                | `true`                         | whether the plugin is enabled or not (e.g. to disable per-environment)                                                                                                                                |
 |cas.serverUrlPrefix	        | `https://authtest.it.usf.edu`  | the 'root' of all CAS server URLs                                                                                                                                                                     |
 |cas.loginUri	                | `/login`	                 | the login URI, relative to `cas.serverUrlPrefix`, e.g. `/login`                                                                                                                                       |
-|cas.sendRenew	                | `false`	                 | if true, ticket validation will only succeed if it was issued from a login form, but will fail if it was issued from a single sign-on session. Analagous to IS_AUTHENTICATED_FULLY in Spring Security |
+|cas.sendRenew	                | `false`	                 | if true, ticket validation will only succeed if it was issued from a login form, but will fail if it was issued from a single sign-on session. Analagous to `IS_AUTHENTICATED_FULLY` in Spring Security |
 |cas.serviceUrl	                | `http://localhost:8080/${appName}/j_spring_cas_security_check` |	the local application login URL |
-|cas.key	random value	used by CasAuthenticationProvider to identify tokens it previously authenticated. Generated automatically by grails usf-cas-config
+|cas.key	| random value	| used by `CasAuthenticationProvider` to identify tokens it previously authenticated. Generated automatically by `grails usf-cas-config` |
 |cas.artifactParameter	ticket	the ticket login url parameter
 |cas.serviceParameter	service	the service login url parameter
 |cas.filterProcessesUrl	/j_spring_cas_security_check	the URL that the filter intercepts for login
