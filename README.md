@@ -115,7 +115,7 @@ Use the plugin helper classes in your application to avoid dealing with some low
 
 ###UsfCasService
 
-**getUsername()**
+####getUsername()
 
 Retrieves the username passed during authentication (NetID)
 
@@ -131,7 +131,7 @@ class SomeController {
 }
 ```
 
-**getEppa()**
+####getEppa()
 
 Retrieves the EduPersonPrimaryAffiliation for the currently logged in user
 
@@ -147,7 +147,7 @@ class SomeController {
 }
 ```
 
-**getAttributes()**
+####getAttributes()
 
 Retrieves a map of the attributes passed by CAS for the currently logged in user
 
@@ -173,7 +173,7 @@ class SomeController {
 def usfCasService
 ```
 
-**getCurrentUser()**
+####getCurrentUser()
 
 Retrieves a domain class instance for the currently authenticated user. During authentication a user/person domain class instance is loaded to get the user's password, roles, etc. and the id of the instance is saved. This method uses the id and the domain class to re-load the instance.
 
@@ -190,7 +190,7 @@ class SomeController {
 }
 ```
 
-**isLoggedIn()**
+####isLoggedIn()
 
 Checks whether there is a currently logged-in user.
 
@@ -211,7 +211,7 @@ class SomeController {
 }
 ```
 
-**getAuthentication()**
+####getAuthentication()
 
 Retrieves the current user's [Authentication](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/core/Authentication.html). If authenticated in, this will typically be a [UsernamePasswordAuthenticationToken](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/authentication/UsernamePasswordAuthenticationToken.html).
 
@@ -228,6 +228,28 @@ class SomeController {
       String username = auth.username
       def authorities = auth.authorities // a Collection of GrantedAuthority
       boolean authenticated = auth.authenticated
+      …
+   }
+}
+```
+
+####getPrincipal()
+
+Retrieves the currently logged in user's `Principal`. If authenticated, the principal will be a `org.codehaus.groovy.grails.plugins.springsecurity.GrailsUser`, unless you have created a custom `UserDetailsService`, in which case it will be whatever implementation of [UserDetails](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/core/userdetails/UserDetails.html) you use there.
+
+If not authenticated and the [AnonymousAuthenticationFilter](http://static.springsource.org/spring-security/site/docs/3.0.x/apidocs/org/springframework/security/web/authentication/AnonymousAuthenticationFilter.html) is active (true by default) then the anonymous user's name will be returned ('anonymousUser' unless overridden).
+
+Example:
+
+```
+class SomeController {
+   def usfCasService
+
+   def someAction = {
+      def principal = usfCasService.principal
+      String username = principal.username
+      def authorities = principal.authorities // a Collection of GrantedAuthority
+      boolean enabled = principal.enabled
       …
    }
 }
