@@ -76,4 +76,4 @@ Once you have tested your app on localhost and are ready to run `grails war`, op
   * Value used for `grails.plugins.springsecurity.cas.serviceUrl`
   * List of attributes that need to be released
 
-##Configuration
+##<a name="configuration"></a>Configuration
